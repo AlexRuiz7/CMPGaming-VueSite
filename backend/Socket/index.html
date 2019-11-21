@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket Viewer</title>
+    
+    <script type="text/javascript">
+        var socket;
+
+        function init() {
+            /**
+             * https://developer.mozilla.org/es/docs/Web/API/WebSocket
+             *
+             */
+            var host = "ws://127.0.0.1:1942/"; // SET THIS TO YOUR SERVER
+            var text =  document.body.children[0];
+
+            // Stablish connection
+            socket = new WebSocket(host);
+            // Add event listener : onOpen
+            socket.addEventListener('open', function (event) {
+                text.innerText = 'Connected';
+            })
+            // Add event listener : onMessage
+            socket.addEventListener('message', function (event) {
+                text.innerText = event.data;
+            })
+            // Add event listener : onClose
+            socket.addEventListener('close', function (event) {
+                text.innerText = 'Disconnected'
+            })
+        }
+    
+    </script>
+</head>
+
+<body onload="init()">
+
+    <pre>No data</pre>
+    
+</body>
+</html>
