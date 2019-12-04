@@ -2,5 +2,6 @@ module.exports = {
   "transpileDependencies": [
     "vuetify"
   ],
-  publicPath: '/vue-stats/frontend/dist/'
+  lintOnSave: false
+  // publicPath: '/vue-stats/frontend/dist/'
 }
