@@ -1,20 +1,25 @@
 <template>
-  <v-flex style="text-align: center">
-    <h1>HOME</h1>
-    <h2>Welcome to CMP Gaming</h2>
-  </v-flex>
+  <parallax 
+    :image="require('../assets/home.jpg')" 
+    header="Welcome to CMP Gaming"
+    text="COMMUNITY BASED GAMING"
+    height="1000"
+  />
 </template>
 
 
 <script>
+import parallax from '@/components/ParallaxComponent';
+
 export default {
   name: 'Home',
 
   components: {
-    //
+    parallax
   },
 
   data: () => ({
     //
   }),
-}
+};
+</script>

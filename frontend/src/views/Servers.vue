@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card dark tile>
       <v-card-title>
         Forgotten Hope 2 Servers by CMP
       <v-spacer/>
@@ -15,9 +15,9 @@
       </v-card-title>
     </v-card>
 
-    <v-data-table
-      :headers="myheader"
-      :items="myitem"
+    <v-data-table dark
+      :headers="main_header"
+      :items="main_item"
       disable-sort
     >
       <template v-slot:body>
@@ -84,9 +84,9 @@ export default {
   },
 
   data: () => ({
-    /* Main table. 1 column parent table needed for formatting */
-    myheader: [{text: 'ONLINE SERVERS', align: 'center'}],
-    myitem: [{}],
+    /* Main table. 1 column table needed as parent for formatting */
+    main_header: [{text: 'ONLINE SERVERS', align: 'center'}],
+    main_item: [{}],
     /* Socket vars */
     socket: null,
     host: "ws://127.0.0.1:1942",

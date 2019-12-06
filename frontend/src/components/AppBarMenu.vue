@@ -12,7 +12,9 @@
             v-text="link.to"
             tile
             hover
+            dark
             class="pa-4 text-center text-uppercase font-weight-bold text-no-wrap text-truncate"
+            active-class="red darken-4"
         />
 
     </v-card>

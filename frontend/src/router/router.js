@@ -1,13 +1,13 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
 /**
  * Routes Components
  */
-import Home     from '../views/Home.vue'
-import Profile  from '../views/Profile.vue'
-import Servers  from '../views/Servers.vue'
-import Stats    from '../views/Stats.vue'
+import Home     from '../views/Home.vue';
+import Profile  from '../views/Profile.vue';
+import Servers  from '../views/Servers.vue';
+import Stats    from '../views/Stats.vue';
 
 Vue.use(VueRouter)
 
@@ -19,7 +19,7 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'profie',
+    name: 'profile',
     component: Profile
   },
   {
@@ -33,7 +33,6 @@ const routes = [
     component: Stats
   },
   { path: '*', redirect: '/home' }
-
 ]
 
 const router = new VueRouter({

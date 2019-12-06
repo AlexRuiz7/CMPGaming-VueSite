@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app>
+  <v-app-bar app dark>
     
     <AppBarLogo name="CMP Gaming" image="cmp-logo.png"/>
 
