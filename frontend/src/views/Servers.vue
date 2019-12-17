@@ -15,6 +15,7 @@
       </v-card-title>
     </v-card>
 
+    <!-- MAIN TABLE -->
     <v-data-table dark
       :headers="main_header"
       :items="main_item"
@@ -32,6 +33,7 @@
           show-expand
           @item-expanded="active($event)"
         >
+        <!-- SERVER TABLE -->
         <template v-slot:expanded-item="{ headers, item }">
           <td :colspan="headers.length">
             <v-data-table
@@ -45,8 +47,15 @@
               group-by="team"
               show-group-by
               group-desc
-            />            
+              disable-pagination
+            >
+            </v-data-table>            
           </td>
+        </template>
+
+        <!-- Customization of Server Name row. Join link on click -->
+        <template v-slot:item.gq_hostname="{ item }">
+          <a :href="item.gq_joinlink"> {{ item.gq_hostname }} </a>
         </template>
         </v-data-table>
       </template>
@@ -97,6 +106,7 @@ export default {
     servers: [],
     search: "",
     headers: [
+      // {text: 'Join link',         value: 'gq_joinlink'  , align: 'center'},
       {text: 'Server name',       value: 'gq_hostname'  , align: 'center'},
       {text: 'Map name',          value: 'gq_mapname'   , align: 'center'},
       {text: 'GameType',          value: 'gq_gametype'  , align: 'center'},
