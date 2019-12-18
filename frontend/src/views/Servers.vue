@@ -57,6 +57,14 @@
         <template v-slot:item.gq_hostname="{ item }">
           <a :href="item.gq_joinlink"> {{ item.gq_hostname }} </a>
         </template>
+
+        <!-- Customization of Game Type row. Readable text -->
+        <template v-slot:item.gq_gametype="{ item }">
+          <template v-if="item.gq_gametype === 'gpm_cq'">
+            Conquest
+          </template>
+        </template>
+
         </v-data-table>
       </template>
     </v-data-table>
