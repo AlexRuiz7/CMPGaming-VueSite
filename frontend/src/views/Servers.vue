@@ -1,30 +1,50 @@
 <template>
-  <v-container>
-    <v-card dark tile>
-      <v-card-title>
-        Forgotten Hope 2 Servers by CMP
-      <v-spacer/>
-      <v-text-field
-        v-model="search"
-        prepend-icon="mdi-magnify"
-        label="Search"
-        color="red darken-4"
-        single-line
-        hide-details
-      />
-      </v-card-title>
-    </v-card>
-
     <!-- MAIN TABLE -->
     <v-data-table dark
       :headers="main_header"
       :items="main_item"
       disable-sort
     >
+      <!-- Top slot -->
+      <template v-slot:top>
+        <v-container>
+          <v-row align="center" justify="space-between">
+            <v-col cols="4">
+              <v-card-title>
+                Forgotten Hope 2 Servers by CMP
+              </v-card-title>
+            </v-col>
+            <v-col cols="3">
+              <v-switch
+                v-model="show_empty"
+                label="Show empty servers"
+                color="red darken-4"  
+              />
+            </v-col>
+            <v-col cols="4">
+              <v-text-field
+                prepend-icon="mdi-magnify"
+                color="red darken-4"
+                v-model="search"
+                placeholder="Search..."
+                clearable
+                single-line
+                filled
+                dense
+                hide-details
+              />
+            </v-col>
+          </v-row>
+        </v-container>
+
+        <v-divider/>
+      </template>
+
+      <!-- Body slot -->
       <template v-slot:body>
         <v-data-table
           :headers="headers"
-          :items="onlineServers"
+          :items="servers2display"
           :search="search"
           :loading="loading"
           :loading-text="loading_msg"
@@ -68,7 +88,6 @@
         </v-data-table>
       </template>
     </v-data-table>
-   </v-container>
 </template>
 
 
@@ -113,6 +132,7 @@ export default {
     /* Component data */
     servers: [],
     search: "",
+    show_empty: true,
     headers: [
       // {text: 'Join link',         value: 'gq_joinlink'  , align: 'center'},
       {text: 'Server name',       value: 'gq_hostname'  , align: 'center'},
@@ -131,60 +151,6 @@ export default {
       {text: 'Ping',   value: 'gq_ping',    align: 'center'},
       {text: 'Team',   value: 'team',       align: 'center'},
     ],
-
-    // items: [
-    //   {gq_hostname: 'AA1', gq_mapname:'BB1', gq_gametype: 'cq', gq_numplayers: 1, gq_maxplayers: 5, bf2_mapsize: 64},
-    //   {gq_hostname: 'AA2', gq_mapname:'BB2', gq_gametype: 'cq', gq_numplayers: 2, gq_maxplayers: 6, bf2_mapsize: 64},
-    //   {gq_hostname: 'AA3', gq_mapname:'BB3', gq_gametype: 'cq', gq_numplayers: 3, gq_maxplayers: 7, bf2_mapsize: 64},
-    //   {gq_hostname: 'AA4', gq_mapname:'BB4', gq_gametype: 'cq', gq_numplayers: 4, gq_maxplayers: 8, bf2_mapsize: 64}
-    // ],
-    // players: [
-    //   {
-    //     "player": "[LP!] RderPSG",
-    //     "score": "0",
-    //     "ping": "84",
-    //     "team": "1",
-    //     "deaths": "2",
-    //     "pid": "465092323",
-    //     "skill": "0",
-    //     "AIBot": "0",
-    //     "gq_name": "PSG",
-    //     "gq_kills": "4",
-    //     "gq_deaths": "12",
-    //     "gq_ping": "74",
-    //     "gq_score": "11"
-    //   },
-    //   {
-    //     "player": "[LP!] R4ydG",
-    //     "score": "1",
-    //     "ping": "94",
-    //     "team": "2",
-    //     "deaths": "22",
-    //     "pid": "465092323",
-    //     "skill": "0",
-    //     "AIBot": "0",
-    //     "gq_name": " R4yder",
-    //     "gq_kills": "7",
-    //     "gq_deaths": "20",
-    //     "gq_ping": "94",
-    //     "gq_score": "1"
-    //   },
-    //   {
-    //     "player": "[LP!]",
-    //     "score": "0",
-    //     "ping": "80",
-    //     "team": "1",
-    //     "deaths": "2",
-    //     "pid": "465092323",
-    //     "skill": "0",
-    //     "AIBot": "0",
-    //     "gq_name": "[LP!]",
-    //     "gq_kills": "3",
-    //     "gq_deaths": "5",
-    //     "gq_ping": "84",
-    //     "gq_score": "27"
-    //   }
-    // ],
     
   }),
 
@@ -203,6 +169,14 @@ export default {
      */
     onlineServers() {
       return this.servers.filter(server => server.gq_online);
+    },
+
+    notEmptyServers() {
+      return this.onlineServers.filter(server => server.players.length != 0);
+    },
+
+    servers2display() {
+      return (this.show_empty) ? this.onlineServers : this.notEmptyServers;
     }
   },
 
