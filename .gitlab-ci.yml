@@ -5,8 +5,7 @@ build:
    - cd frontend
    - npm install
    - npm run build
-
-   artifacts:
+  artifacts:
     paths:
     - frontend/dist
     expire_in: 1 week
