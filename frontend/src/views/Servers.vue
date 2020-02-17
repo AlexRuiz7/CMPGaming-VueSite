@@ -54,7 +54,6 @@
           must-sort
           sort-by="gq_numplayers"
           sort-desc
-          @item-expanded="active($event)"
         >
         <!-- SERVER TABLE -->
         <template v-slot:expanded-item="{ headers, item }">
@@ -88,11 +87,6 @@
             Conquest
           </template>
         </template>
-
-        <!-- Customization of teams naming. Replace team index by team name -->
-        <!-- <template v-slot:item.team="{ item, value }">
-          <pre> {{ item }} </pre>
-        </template> -->
 
         </v-data-table>
       </template>
@@ -180,7 +174,6 @@ export default {
       var onlineServers = this.servers.filter(server => server.gq_online);
 
       this.renameTeams(onlineServers);
-      // console.log(JSON.stringify(onlineServers));
 
       return onlineServers;
     },
@@ -195,10 +188,6 @@ export default {
   },
 
   methods: {
-    active(event) {
-      // console.log(event)
-    },
-
     renameTeams(servers) {
       for(const server of servers) {
         for(var player of server.players)
