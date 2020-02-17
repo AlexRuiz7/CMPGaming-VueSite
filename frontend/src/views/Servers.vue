@@ -51,6 +51,9 @@
           item-key="gq_hostname"
           hide-default-footer
           show-expand
+          must-sort
+          sort-by="gq_numplayers"
+          sort-desc
           @item-expanded="active($event)"
         >
         <!-- SERVER TABLE -->
@@ -67,6 +70,7 @@
               group-by="team"
               show-group-by
               group-desc
+              must-sort
               disable-pagination
             >
             </v-data-table>            
@@ -84,6 +88,11 @@
             Conquest
           </template>
         </template>
+
+        <!-- Customization of teams naming. Replace team index by team name -->
+        <!-- <template v-slot:item.team="{ item, value }">
+          <pre> {{ item }} </pre>
+        </template> -->
 
         </v-data-table>
       </template>
@@ -168,7 +177,12 @@ export default {
      * IMPORTANT: filter servers by gq_online
      */
     onlineServers() {
-      return this.servers.filter(server => server.gq_online);
+      var onlineServers = this.servers.filter(server => server.gq_online);
+
+      this.renameTeams(onlineServers);
+      // console.log(JSON.stringify(onlineServers));
+
+      return onlineServers;
     },
 
     notEmptyServers() {
@@ -183,6 +197,13 @@ export default {
   methods: {
     active(event) {
       // console.log(event)
+    },
+
+    renameTeams(servers) {
+      for(const server of servers) {
+        for(var player of server.players)
+          player.team = server.teams[2 - player.team].team;
+      }
     }
   }
 };
