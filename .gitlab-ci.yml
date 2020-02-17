@@ -1,0 +1,11 @@
+image: node:latest
+
+build:
+  script:
+   - cd frontend
+   - npm install
+   - npm run build
+  artifacts:
+    paths:
+    - frontend/dist
+    expire_in: 1 week
