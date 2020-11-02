@@ -1,4 +1,4 @@
-# frontend
+# CMP Gaming Vue Site
 
 ## Project setup
 ```
@@ -18,6 +18,11 @@ npm run build
 ### Lints and fixes files
 ```
 npm run lint
+```
+
+### Projecy deploy
+```
+node server.js
 ```
 
 ### Customize configuration
