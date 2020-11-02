@@ -2,8 +2,8 @@
 <?php
 
 require_once './config/serversInfo.php';
-require_once './Socket/Websockets.php';
-require_once './GameQ/Autoloader.php';
+require_once './libs/Socket/Websockets.php';
+require_once './libs/GameQ/Autoloader.php';
 
 /**
  * CMPSocket class
@@ -104,7 +104,7 @@ class CMPSocket extends WebSocketServer {
 /**
  * Start socket server
  */
-$socket = new CMPSocket('localhost', '1942');
+$socket = new CMPSocket('localhost', '8080');
 
 try {
     $socket->run();
