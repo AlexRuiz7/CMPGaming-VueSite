@@ -98,28 +98,45 @@
 export default {
   name: "Servers",
 
-  mounted() {
-    /* Stablish connection */
-    this.socket = new WebSocket(this.host);
+  /* Stablish connection */
+  sockets: {
+    connect() {
+      this.loading = false
+    },
 
-    // Add event listener : onOpen
-    this.socket.addEventListener("open", () => this.loading = false);
-
-    // Add event listener : onMessage
-    this.socket.addEventListener("message", (event) => {
-      var data = JSON.parse(event.data);
-      var formatted_data = Array();
-      for (const key in data) {
-        formatted_data.push(data[key])
-      }
-      this.servers = formatted_data;
-    });
-
-    // Add event listener : onClose
-    this.socket.addEventListener("close", () => {
+    disconnect() {
       this.loading = true; 
       this.loading_msg = 'Connection with the server has been lost';
-    });
+    },
+
+    // Fired when the server sends something on the "messageChannel" channel.
+    // messageChannel(data) {
+      // this.socketMessage = data
+    // }
+  },
+
+  mounted() {
+    /* Stablish connection */
+    // this.socket = new WebSocket(this.host);
+
+    // // Add event listener : onOpen
+    // this.socket.addEventListener("open", () => this.loading = false);
+
+    // // Add event listener : onMessage
+    // this.socket.addEventListener("message", (event) => {
+    //   var data = JSON.parse(event.data);
+    //   var formatted_data = Array();
+    //   for (const key in data) {
+    //     formatted_data.push(data[key])
+    //   }
+    //   this.servers = formatted_data;
+    // });
+
+    // // Add event listener : onClose
+    // this.socket.addEventListener("close", () => {
+      // this.loading = true; 
+      // this.loading_msg = 'Connection with the server has been lost';
+    // });
   },
 
   data: () => ({
