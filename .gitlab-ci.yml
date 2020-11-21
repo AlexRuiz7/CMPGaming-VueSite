@@ -9,6 +9,7 @@ build:
   before_script:
     - apt-get update
     - apt-get install -y php
+    - apt-get install -y php-bz2
     - apt-get install -y zip unzip
   script:
     - cd app/src/api
