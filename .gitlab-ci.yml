@@ -16,7 +16,7 @@ build:
     # - php composer.phar install
   script:
     - cd app/src/api
-    - composer install
+    - php composer.phar install
     - cd ../..
     - npm install
     - npm run build
