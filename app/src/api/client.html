@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket Viewer</title>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket;
+
+        function init() {
+            var text =  document.body.children[0];
+
+            // Stablish connection
+            socket = io();
+            // Add event listener : onOpen
+            socket.on('open', function (event) {
+                text.innerText = 'Connected';
+            })
+            // Add event listener : onMessage{'servers'}
+            socket.on('servers', function (data) {
+                console.log(data);
+                text.innerText = JSON.stringify(data, null, 2);
+            })
+            // Add event listener : onClose
+            socket.on('close', function (event) {
+                text.innerText = 'Disconnected'
+            })
+        }
+    
+    </script>
+</head>
+
+<body onload="init()">
+
+    <pre>No data</pre>
+    
+</body>
+</html>

@@ -1,0 +1,1 @@
+<pre> <?php include(__DIR__ . '/query.php'); ?> </pre>
