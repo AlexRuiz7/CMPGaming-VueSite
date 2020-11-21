@@ -2,13 +2,13 @@
   <v-app id>
     <AppBar/>
 
-    <v-content app>
+    <v-main app>
       <v-container fluid>
         <v-fade-transition mode="out-in">
           <router-view></router-view>
         </v-fade-transition>
       </v-container>
-    </v-content>      
+    </v-main>      
 
   </v-app>
 </template>

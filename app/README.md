@@ -1,26 +1,33 @@
 # CMP Gaming Vue Site
 
 ## Project setup
+### Frontend install
 ```
 npm install
 ```
+### Backend install
+Go to src/api and follow the instructions in the README.
 
-### Compiles and hot-reloads for development
+## Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+## Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Lints and fixes files
+## Lints and fixes files
 ```
 npm run lint
 ```
 
-### Projecy deploy
+## Deploys app (requires build)
+```
+npm run start
+```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or
 ```
 node server.js
 ```

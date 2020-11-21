@@ -18,7 +18,7 @@
               <v-switch
                 v-model="show_empty"
                 label="Show empty servers"
-                color="red darken-4"  
+                color="red darken-4"
               />
             </v-col>
             <v-col cols="4">
@@ -71,18 +71,17 @@
               group-desc
               must-sort
               disable-pagination
-            >
-            </v-data-table>            
+            />
           </td>
         </template>
 
         <!-- Customization of Server Name row. Join link on click -->
-        <template v-slot:item.gq_hostname="{ item }">
-          <a :href="item.gq_joinlink"> {{ item.gq_hostname }} </a>
+        <template v-slot:[`item.gq_hostname`]="{ item }">
+          <a :href="fh2JoinLink(item.gq_joinlink)"> {{ item.gq_hostname }} </a>
         </template>
 
         <!-- Customization of Game Type row. Readable text -->
-        <template v-slot:item.gq_gametype="{ item }">
+        <template v-slot:[`item.gq_gametype`]="{ item }">
           <template v-if="item.gq_gametype === 'gpm_cq'">
             Conquest
           </template>
@@ -95,57 +94,54 @@
 
 
 <script>
+import Vue from 'vue'
+import VueSocketIO from 'vue-socket.io'
+import SocketIO from 'socket.io-client'
+
+Vue.use(new VueSocketIO({
+    debug: false,
+    connection: SocketIO(document.location.origin, {autoconnect: false}),
+    // connection: SocketIO('http://127.0.0.1:1942', {autoconnect: false}), // only for testing
+  })
+);
+
 export default {
   name: "Servers",
 
   /* Stablish connection */
   sockets: {
-    connect() {
-      this.loading = false
+    connect () {
+      this.loading = false;
+      console.log("Socket connected");
     },
 
     disconnect() {
-      this.loading = true; 
+      this.servers = [];
+      this.loading = true;
       this.loading_msg = 'Connection with the server has been lost';
+      console.log("Socket disconnected");
     },
 
-    // Fired when the server sends something on the "messageChannel" channel.
-    // messageChannel(data) {
-      // this.socketMessage = data
-    // }
-  },
+    connect_error(error) {
+      this.$socket.emit('disconnect');
+    },
 
-  mounted() {
-    /* Stablish connection */
-    // this.socket = new WebSocket(this.host);
+    // Fired when the server sends something on the "servers" channel.
+    servers(payload) {
+      this.loading = false;
 
-    // // Add event listener : onOpen
-    // this.socket.addEventListener("open", () => this.loading = false);
-
-    // // Add event listener : onMessage
-    // this.socket.addEventListener("message", (event) => {
-    //   var data = JSON.parse(event.data);
-    //   var formatted_data = Array();
-    //   for (const key in data) {
-    //     formatted_data.push(data[key])
-    //   }
-    //   this.servers = formatted_data;
-    // });
-
-    // // Add event listener : onClose
-    // this.socket.addEventListener("close", () => {
-      // this.loading = true; 
-      // this.loading_msg = 'Connection with the server has been lost';
-    // });
+      var servers_array = Array();
+      for (const key in payload) {
+        servers_array.push(payload[key])
+      }
+      this.servers = servers_array;
+    }
   },
 
   data: () => ({
     /* Main table. 1 column table needed as parent for formatting */
     main_header: [{text: 'ONLINE SERVERS', align: 'center'}],
     main_item: [{}],
-    /* Socket vars */
-    socket: null,
-    host: "ws://127.0.0.1:1942",
     /* State vars */
     loading: true,
     loading_msg: 'Connecting...',
@@ -210,6 +206,9 @@ export default {
         for(var player of server.players)
           player.team = server.teams[2 - player.team].team;
       }
+    },
+    fh2JoinLink(bf2_joinlink) {
+      return bf2_joinlink.replace('bf2', 'fh2');
     }
   }
 };
