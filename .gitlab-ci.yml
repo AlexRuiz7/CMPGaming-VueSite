@@ -1,15 +1,24 @@
 image: node:latest
 
+cache:
+  paths:
+    - app/src/api/vendor/
+    - app/node_modules/
+
 build:
+  before_script:
+  - apt-install -y php
+  - apt-get install zip unzip
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php composer-setup.php
+  - php -r "unlink('composer-setup.php');"
+  - php composer.phar install
   script:
-    - node -v
-    - npm -v
-    - php -v
-  #  - cd app/src/api
-  #  - composer install
-  #  - cd ../..
-  #  - npm install
-  #  - npm run build
+   - cd app/src/api
+   - composer install
+   - cd ../..
+   - npm install
+   - npm run build
   artifacts:
     paths:
     - app/dist
