@@ -1,11 +1,11 @@
 # CMP Gaming Vue Site
 
 ## Project setup
-### Frontend install
+### Frontend
 ```
 npm install
 ```
-### Backend install
+### Backend
 Go to src/api and follow the instructions in the README.
 
 ## Compiles and hot-reloads for development
