@@ -8,3 +8,10 @@ Project under development.
 
 In future versions, the application will also serve and display player stats from 
 Forgotten Hope 2 Tournaments hosted by CMP.
+
+## Project dependencies
+    - Vue.js: ^v2.6.10
+    - Node.js: ^v11.4.0
+    - NPM: ^v6.14.8
+    - PHP: ^v7.2.24
+    - Composer: ^v2.0.3
