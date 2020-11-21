@@ -2,10 +2,15 @@ image: node:latest
 
 build:
   script:
-   - cd frontend
-   - npm install
-   - npm run build
+    - node -v
+    - npm -v
+    - php -v
+  #  - cd app/src/api
+  #  - composer install
+  #  - cd ../..
+  #  - npm install
+  #  - npm run build
   artifacts:
     paths:
-    - frontend/dist
+    - app/dist
     expire_in: 1 week
