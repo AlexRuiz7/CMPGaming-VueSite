@@ -6,3 +6,6 @@ Provides real time information about Forgotten Hope 2 servers in JSON format
 ```
 composer install
 ```
+
+## Raw display
+Open client.html
