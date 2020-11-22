@@ -13,5 +13,7 @@ Forgotten Hope 2 Tournaments hosted by CMP.
     - Vue.js: ^v2.6.10
     - Node.js: ^v11.4.0
     - NPM: ^v6.14.8
-    - PHP: ^v7.2.24
+    - PHP: ^v5.6.4
+      - php-bz2
+      - php-xml
     - Composer: ^v2.0.3
