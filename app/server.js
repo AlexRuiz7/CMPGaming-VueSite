@@ -2,6 +2,8 @@
 
 'use strict';
 
+require('dotenv').config();
+
 // Includes
 const path = require('path');
 const { exec } = require('child_process');
