@@ -9,8 +9,8 @@
           cols="12"
         >
         <v-parallax
-            :height="height"
-            :src="image"
+          :height="height"
+          :src="image"
         >
         <v-row 
           align="center" 
@@ -61,8 +61,8 @@ export default {
     },
     image: String,
     height: {
-        type: [Number, String],
-        height: '100%'
+      type: [Number, String],
+      // default: '1000'
     },
     sheet: {
       type: Boolean,

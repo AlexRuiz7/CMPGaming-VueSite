@@ -3,7 +3,8 @@
     :image="require('../assets/home.jpg')" 
     header="Welcome to CMP Gaming"
     text="COMMUNITY BASED GAMING"
-    height="1000"
+    :height="800"
+    sheet
   />
 </template>
 
