@@ -37,3 +37,18 @@ jobs:
         with:
           name: Build artifacts (dist)
           path: app/dist/
+  
+  deploy:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: app/dist
+          destination-github-username: AlexRuiz7
+          destination-repository-name: ${{ secrets.DEST_REPO }}
+          user-email: ${{ secrets.EMAIL }}
