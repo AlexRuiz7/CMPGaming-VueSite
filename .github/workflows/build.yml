@@ -37,12 +37,6 @@ jobs:
         with:
           name: Build artifacts (dist)
           path: app/dist/
-  
-  deploy:
-    
-    runs-on: ubuntu-latest
-    
-    steps:
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@master
         env:
